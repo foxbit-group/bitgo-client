@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "bitgo_client"
 require "bundler/setup"
 
