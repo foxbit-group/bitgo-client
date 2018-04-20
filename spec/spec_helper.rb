@@ -1,5 +1,5 @@
+require "bitgo_client"
 require "bundler/setup"
-require "bitgo/client"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
