@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 require "bitgo_client"
+
 require "bundler/setup"
+require "pry-byebug"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
