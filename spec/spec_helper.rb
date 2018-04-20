@@ -3,11 +3,14 @@
 require "bitgo_client"
 
 require "bundler/setup"
+require "webmock/rspec"
 require "pry-byebug"
 require "simplecov"
 require "simplecov-console"
 
 Dir["./spec/support/**/*.rb"].each { |file| require file }
+
+WebMock.disable_net_connect!
 
 RSpec.configure do |config|
   config.example_status_persistence_file_path = ".rspec_status"
