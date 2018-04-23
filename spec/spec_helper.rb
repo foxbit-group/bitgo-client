@@ -5,8 +5,6 @@ require "bitgo_client"
 require "bundler/setup"
 require "webmock/rspec"
 require "pry-byebug"
-require "simplecov"
-require "simplecov-console"
 
 Dir["./spec/support/**/*.rb"].each { |file| require file }
 
@@ -21,6 +19,3 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
-
-SimpleCov.formatter = SimpleCov.formatter = SimpleCov::Formatter::Console
-SimpleCov.start

@@ -7,7 +7,7 @@ A Ruby client to BitGo's API and Express API.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'bitgo-client'
+gem "bitgo-client"
 ```
 
 And then execute:
