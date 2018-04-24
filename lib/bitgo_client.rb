@@ -6,3 +6,5 @@ require "typhoeus"
 
 # Source
 require "bitgo_client/version"
+require "bitgo_client/errors/request_error"
+require "bitgo_client/client"
