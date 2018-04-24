@@ -59,7 +59,7 @@ module BitgoClient
 
     def build_query_string(hash)
       uri = Addressable::URI.new
-      uri.query_values = hash.compact
+      uri.query_values = hash.delete_if { |k, v| v.nil? }
       uri.query
     end
   end
