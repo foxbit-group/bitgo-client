@@ -134,19 +134,20 @@ RSpec.describe BitgoClient::V2 do
   end
 
   describe "#transactions" do
-    context "with default coin_code" do
+    context "with default params" do
       it "calls client request with the correct path" do
         api.transactions(wallet_id)
 
-        expect(client).to have_received(:request).with("#{api.base_path}/tbtc/wallet/#{wallet_id}/tx")
+        expect(client).to have_received(:request).with("#{api.base_path}/tbtc/wallet/#{wallet_id}/tx?limit=25")
       end
     end
 
-    context "with specific coin_code" do
+    context "with specific params" do
       it "calls client request with the correct path" do
-        api.transactions(wallet_id, coin_code: :xxx)
+        api.transactions(wallet_id, coin_code: :xxx, limit: 250, prev_id: "xxx42", all_tokens: true)
 
-        expect(client).to have_received(:request).with("#{api.base_path}/xxx/wallet/#{wallet_id}/tx")
+        expect(client).to have_received(:request)
+          .with("#{api.base_path}/xxx/wallet/#{wallet_id}/tx?allTokens=true&limit=250&prevId=xxx42")
       end
     end
   end

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "addressable/uri"
+
 module BitgoClient
   class V2
     ENV_PROD  = "prod"
@@ -39,12 +41,26 @@ module BitgoClient
       client.request("#{express_path}/api/v2/#{coin_code}/wallet/#{wallet_id}/sendcoins", payload, method: :post)
     end
 
-    def transactions(wallet_id, coin_code: :tbtc)
-      client.request("#{base_path}/#{coin_code}/wallet/#{wallet_id}/tx")
+    def transactions(wallet_id, coin_code: :tbtc, limit: 25, prev_id: nil, all_tokens: nil)
+      query_string = build_query_string(
+        limit:     limit,
+        prevId:    prev_id,
+        allTokens: all_tokens
+      )
+
+      client.request("#{base_path}/#{coin_code}/wallet/#{wallet_id}/tx?#{query_string}")
     end
 
     def transaction(wallet_id, transaction_id, coin_code: :tbtc)
       client.request("#{base_path}/#{coin_code}/wallet/#{wallet_id}/tx/#{transaction_id}")
+    end
+
+    private
+
+    def build_query_string(hash)
+      uri = Addressable::URI.new
+      uri.query_values = hash.compact
+      uri.query
     end
   end
 end
