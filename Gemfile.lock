@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bitgo-client (0.1.0)
+    bitgo-client (0.1.1)
       addressable (~> 2.5)
       typhoeus (~> 1.3)
 
