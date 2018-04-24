@@ -7,10 +7,10 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "bitgo_client/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "bitgo-client"
-  spec.version       = BitgoClient::VERSION
-  spec.authors       = ["Bruno Soares"]
-  spec.email         = ["bruno@bsoares.com"]
+  spec.name    = "bitgo-client"
+  spec.version = BitgoClient::VERSION
+  spec.authors = ["Bruno Soares"]
+  spec.email   = ["bruno@bsoares.com"]
 
   spec.summary     = "BitGo's API Client."
   spec.description = "A Ruby client to BitGo's API and Express API."
