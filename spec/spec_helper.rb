@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "bitgo_client"
+require "bitgo-client"
 
 require "bundler/setup"
 require "webmock/rspec"

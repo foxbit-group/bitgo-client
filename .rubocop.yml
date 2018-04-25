@@ -18,9 +18,13 @@ Metrics/MethodLength:
 Metrics/AbcSize:
   Max: 30
 
+RSpec/ExampleLength:
+  Max: 20
+
+Naming/FileName:
+  Exclude:
+    - "lib/bitgo-client.rb"
+
 Metrics/BlockLength:
   Exclude:
     - "spec/**/*.rb"
-
-RSpec/ExampleLength:
-  Max: 20
