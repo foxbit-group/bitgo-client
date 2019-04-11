@@ -52,8 +52,12 @@ module BitgoClient
 
       log logger, "Response code: '#{code}', body: '#{body}'"
 
-      if response.failure? || !code.between?(200, 300)
-        raise BitgoClient::Errors::RequestError.new("BitGo API response error.", response)
+      if response.failure?
+        raise BitgoClient::Errors::RequestError.new("BitGo API response error (code: #{code}).", response)
+      end
+
+      if [408, 524].include?(code)
+        raise BitgoClient::Errors::RequestError.new("BitGo API Timeout error (code: #{code}).", response)
       end
 
       JSON.parse(body)
