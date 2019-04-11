@@ -74,7 +74,7 @@ PLATFORMS
 DEPENDENCIES
   bitgo-client!
   bundler (~> 1.16)
-  pry-byebug (~> 3.7)
+  pry-byebug (~> 3.6)
   rake (~> 10.0)
   rspec (~> 3.8)
   rubocop (~> 0.53)
