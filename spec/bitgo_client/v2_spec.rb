@@ -56,7 +56,7 @@ RSpec.describe BitgoClient::V2 do
       it "calls client request with the correct path" do
         api.wallet(wallet_id)
 
-        expect(client).to have_received(:request).with("#{api.base_path}/tbtc/wallet/#{wallet_id}")
+        expect(client).to have_received(:request).with("#{api.base_path}/tbtc/wallet/#{wallet_id}", logger: nil)
       end
     end
 
@@ -64,7 +64,7 @@ RSpec.describe BitgoClient::V2 do
       it "calls client request with the correct path" do
         api.wallet(wallet_id, coin_code: :xxx)
 
-        expect(client).to have_received(:request).with("#{api.base_path}/xxx/wallet/#{wallet_id}")
+        expect(client).to have_received(:request).with("#{api.base_path}/xxx/wallet/#{wallet_id}", logger: nil)
       end
     end
   end
@@ -75,7 +75,7 @@ RSpec.describe BitgoClient::V2 do
         api.create_address(wallet_id)
 
         expect(client).to have_received(:request)
-          .with("#{api.base_path}/tbtc/wallet/#{wallet_id}/address", method: :post)
+          .with("#{api.base_path}/tbtc/wallet/#{wallet_id}/address", method: :post, logger: nil)
       end
     end
 
@@ -84,7 +84,7 @@ RSpec.describe BitgoClient::V2 do
         api.create_address(wallet_id, coin_code: :xxx)
 
         expect(client).to have_received(:request)
-          .with("#{api.base_path}/xxx/wallet/#{wallet_id}/address", method: :post)
+          .with("#{api.base_path}/xxx/wallet/#{wallet_id}/address", method: :post, logger: nil)
       end
     end
   end
@@ -97,7 +97,7 @@ RSpec.describe BitgoClient::V2 do
         api.address(wallet_id, address)
 
         expect(client).to have_received(:request)
-          .with("#{api.base_path}/tbtc/wallet/#{wallet_id}/address/#{address}")
+          .with("#{api.base_path}/tbtc/wallet/#{wallet_id}/address/#{address}", logger: nil)
       end
     end
 
@@ -106,7 +106,7 @@ RSpec.describe BitgoClient::V2 do
         api.address(wallet_id, address, coin_code: :xxx)
 
         expect(client).to have_received(:request)
-          .with("#{api.base_path}/xxx/wallet/#{wallet_id}/address/#{address}")
+          .with("#{api.base_path}/xxx/wallet/#{wallet_id}/address/#{address}", logger: nil)
       end
     end
   end
@@ -119,7 +119,7 @@ RSpec.describe BitgoClient::V2 do
         api.send_transaction(wallet_id, payload)
 
         expect(client).to have_received(:request)
-          .with("#{api.express_path}/api/v2/tbtc/wallet/#{wallet_id}/sendcoins", payload, method: :post)
+          .with("#{api.express_path}/api/v2/tbtc/wallet/#{wallet_id}/sendcoins", payload, method: :post, logger: nil)
       end
     end
 
@@ -128,7 +128,7 @@ RSpec.describe BitgoClient::V2 do
         api.send_transaction(wallet_id, payload, coin_code: :xxx)
 
         expect(client).to have_received(:request)
-          .with("#{api.express_path}/api/v2/xxx/wallet/#{wallet_id}/sendcoins", payload, method: :post)
+          .with("#{api.express_path}/api/v2/xxx/wallet/#{wallet_id}/sendcoins", payload, method: :post, logger: nil)
       end
     end
   end
@@ -138,7 +138,8 @@ RSpec.describe BitgoClient::V2 do
       it "calls client request with the correct path" do
         api.transactions(wallet_id)
 
-        expect(client).to have_received(:request).with("#{api.base_path}/tbtc/wallet/#{wallet_id}/tx?limit=25")
+        expect(client).to have_received(:request)
+          .with("#{api.base_path}/tbtc/wallet/#{wallet_id}/tx?limit=25", logger: nil)
       end
     end
 
@@ -147,7 +148,7 @@ RSpec.describe BitgoClient::V2 do
         api.transactions(wallet_id, coin_code: :xxx, limit: 250, prev_id: "xxx42", all_tokens: true)
 
         expect(client).to have_received(:request)
-          .with("#{api.base_path}/xxx/wallet/#{wallet_id}/tx?allTokens=true&limit=250&prevId=xxx42")
+          .with("#{api.base_path}/xxx/wallet/#{wallet_id}/tx?allTokens=true&limit=250&prevId=xxx42", logger: nil)
       end
     end
   end
@@ -159,7 +160,8 @@ RSpec.describe BitgoClient::V2 do
       it "calls client request with the correct path" do
         api.transaction(wallet_id, tx_id)
 
-        expect(client).to have_received(:request).with("#{api.base_path}/tbtc/wallet/#{wallet_id}/tx/#{tx_id}")
+        expect(client).to have_received(:request)
+          .with("#{api.base_path}/tbtc/wallet/#{wallet_id}/tx/#{tx_id}", logger: nil)
       end
     end
 
@@ -167,7 +169,8 @@ RSpec.describe BitgoClient::V2 do
       it "calls client request with the correct path" do
         api.transaction(wallet_id, tx_id, coin_code: :xxx)
 
-        expect(client).to have_received(:request).with("#{api.base_path}/xxx/wallet/#{wallet_id}/tx/#{tx_id}")
+        expect(client).to have_received(:request)
+          .with("#{api.base_path}/xxx/wallet/#{wallet_id}/tx/#{tx_id}", logger: nil)
       end
     end
   end
