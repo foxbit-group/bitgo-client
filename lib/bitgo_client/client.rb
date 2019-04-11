@@ -47,11 +47,16 @@ module BitgoClient
 
       response = request.response
 
-      log logger, "Response code: '#{response.code}', body: '#{response.body}'"
+      code = response.code
+      body = response.body
 
-      raise BitgoClient::Errors::RequestError.new("BitGo API response error.", response) if response.failure?
+      log logger, "Response code: '#{code}', body: '#{body}'"
 
-      JSON.parse(response.body)
+      if response.failure? || !code.between?(200, 300)
+        raise BitgoClient::Errors::RequestError.new("BitGo API response error.", response)
+      end
+
+      JSON.parse(body)
     end
 
     private
