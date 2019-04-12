@@ -52,15 +52,17 @@ module BitgoClient
 
       log logger, "Response code: '#{code}', body: '#{body}'"
 
-      if response.failure?
-        raise BitgoClient::Errors::RequestError.new("BitGo API response error (code: #{code}).", response)
+      if [408, 504, 524].include?(code)
+        raise BitgoClient::Errors::RequestError.new("[BitGo API Error] Timeout (code: #{code}).", response)
+      elsif response.failure?
+        raise BitgoClient::Errors::RequestError.new("[BitGo API Error] code: #{code}.", response)
+      elsif body.nil? || body == ""
+        {}
+      elsif valid_json?(body)
+        JSON.parse(body)
+      else
+        raise BitgoClient::Errors::RequestError.new("[BitGo API Error] Invalid JSON (code: #{code}).", response)
       end
-
-      if [408, 524].include?(code)
-        raise BitgoClient::Errors::RequestError.new("BitGo API Timeout error (code: #{code}).", response)
-      end
-
-      JSON.parse(body)
     end
 
     private
@@ -80,6 +82,13 @@ module BitgoClient
       else
         logger.debug(tag) { message }
       end
+    end
+
+    def valid_json?(json)
+      JSON.parse(json)
+      return true
+    rescue JSON::ParserError => e
+      return false
     end
   end
 end
