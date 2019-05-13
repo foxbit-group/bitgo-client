@@ -9,12 +9,12 @@ require "bitgo_client/version"
 Gem::Specification.new do |spec|
   spec.name    = "bitgo-client"
   spec.version = BitgoClient::VERSION
-  spec.authors = ["Bruno Soares"]
-  spec.email   = ["bruno@bsoares.com"]
+  spec.authors = ["Bruno Soares", "Arturo Blanco"]
+  spec.email   = ["bruno@bsoares.com", "arturoblanco700@gmail.com"]
 
   spec.summary     = "BitGo's API Client."
   spec.description = "A Ruby client to BitGo's API and Express API."
-  spec.homepage    = "https://bitbucket.org/modiaxtech/bitgo-client"
+  spec.homepage    = "https://github.com/modiax/bitgo-client"
   spec.license     = "MIT"
 
   spec.files         = Dir["lib/**/*"]
