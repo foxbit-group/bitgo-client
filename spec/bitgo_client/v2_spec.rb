@@ -174,4 +174,24 @@ RSpec.describe BitgoClient::V2 do
       end
     end
   end
+
+  describe "#stimatesmartfee" do
+    context "with default coin_code" do
+      it "calls client request with the correct path" do
+        api.stimatesmartfee
+
+        expect(client).to have_received(:request)
+          .with("#{api.base_path}/tbtc/tx/fee", logger: nil)
+      end
+    end
+
+    context "with specific coin_code" do
+      it "calls client request with the correct path" do
+        api.stimatesmartfee(coin_code: :xxx)
+
+        expect(client).to have_received(:request)
+          .with("#{api.base_path}/xxx/tx/fee", logger: nil)
+      end
+    end
+  end
 end
