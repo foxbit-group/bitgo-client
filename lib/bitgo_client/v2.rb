@@ -60,7 +60,7 @@ module BitgoClient
       client.request("#{base_path}/#{coin_code}/wallet/#{wallet_id}/tx/#{transaction_id}", logger: logger)
     end
 
-    def stimatesmartfee(coin_code: :tbtc, logger: nil)
+    def fee(coin_code: :tbtc, logger: nil)
       client.request("#{base_path}/#{coin_code}/tx/fee", logger: logger)
     end
 
