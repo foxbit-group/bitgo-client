@@ -25,16 +25,20 @@ module BitgoClient
       BitgoClient::Client.new(access_token)
     end
 
-    def wallet(wallet_id, coin_code: :tbtc, logger: nil)
-      client.request("#{base_path}/#{coin_code}/wallet/#{wallet_id}", logger: logger)
-    end
-
     def create_address(wallet_id, coin_code: :tbtc, logger: nil)
       client.request("#{base_path}/#{coin_code}/wallet/#{wallet_id}/address", method: :post, logger: logger)
     end
 
     def address(wallet_id, address, coin_code: :tbtc, logger: nil)
       client.request("#{base_path}/#{coin_code}/wallet/#{wallet_id}/address/#{address}", logger: logger)
+    end
+
+    def fee(coin_code: :tbtc, logger: nil)
+      client.request("#{base_path}/#{coin_code}/tx/fee", logger: logger)
+    end
+
+    def get_transfer(wallet_id, transfer_id, coin_code: :tbtc, logger: nil)
+      client.request("#{base_path}/#{coin_code}/wallet/#{wallet_id}/transfer/#{transfer_id}", logger: logger)
     end
 
     def send_transaction(wallet_id, payload, coin_code: :tbtc, logger: nil)
@@ -60,8 +64,18 @@ module BitgoClient
       client.request("#{base_path}/#{coin_code}/wallet/#{wallet_id}/tx/#{transaction_id}", logger: logger)
     end
 
-    def fee(coin_code: :tbtc, logger: nil)
-      client.request("#{base_path}/#{coin_code}/tx/fee", logger: logger)
+    def transfers(wallet_id, coin_code: :tbtc, logger: nil, limit: 25, prev_id: nil, all_tokens: nil)
+      query_string = build_query_string(
+        limit:     limit,
+        prevId:    prev_id,
+        allTokens: all_tokens
+      )
+
+      client.request("#{base_path}/#{coin_code}/wallet/#{wallet_id}/transfer?#{query_string}", logger: logger)
+    end
+
+    def wallet(wallet_id, coin_code: :tbtc, logger: nil)
+      client.request("#{base_path}/#{coin_code}/wallet/#{wallet_id}", logger: logger)
     end
 
     private

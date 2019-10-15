@@ -194,4 +194,46 @@ RSpec.describe BitgoClient::V2 do
       end
     end
   end
+
+  describe "#transfers" do
+    context "with default params" do
+      it "calls client request with the correct path" do
+        api.transfers(wallet_id)
+
+        expect(client).to have_received(:request)
+          .with("#{api.base_path}/tbtc/wallet/#{wallet_id}/transfer?limit=25", logger: nil)
+      end
+    end
+
+    context "with specific params" do
+      it "calls client request with the correct path" do
+        api.transfers(wallet_id, coin_code: :xxx, limit: 250, prev_id: "xxx42", all_tokens: true)
+
+        expect(client).to have_received(:request)
+          .with("#{api.base_path}/xxx/wallet/#{wallet_id}/transfer?allTokens=true&limit=250&prevId=xxx42", logger: nil)
+      end
+    end
+  end
+
+  describe "#get_transfer" do
+    let(:tx_id) { "0x888" }
+
+    context "with default coin_code" do
+      it "calls client request with the correct path" do
+        api.get_transfer(wallet_id, tx_id)
+
+        expect(client).to have_received(:request)
+          .with("#{api.base_path}/tbtc/wallet/#{wallet_id}/transfer/#{tx_id}", logger: nil)
+      end
+    end
+
+    context "with specific coin_code" do
+      it "calls client request with the correct path" do
+        api.get_transfer(wallet_id, tx_id, coin_code: :xxx)
+
+        expect(client).to have_received(:request)
+          .with("#{api.base_path}/xxx/wallet/#{wallet_id}/transfer/#{tx_id}", logger: nil)
+      end
+    end
+  end
 end
