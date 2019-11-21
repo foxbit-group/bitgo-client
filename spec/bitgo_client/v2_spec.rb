@@ -56,7 +56,7 @@ RSpec.describe BitgoClient::V2 do
       it "calls client request with the correct path" do
         api.wallet(wallet_id)
 
-        expect(client).to have_received(:request).with("#{api.base_path}/tbtc/wallet/#{wallet_id}", logger: nil)
+        expect(client).to have_received(:request).with("#{api.base_path}/tbtc/wallet/#{wallet_id}?", logger: nil)
       end
     end
 
@@ -64,7 +64,7 @@ RSpec.describe BitgoClient::V2 do
       it "calls client request with the correct path" do
         api.wallet(wallet_id, coin_code: :xxx)
 
-        expect(client).to have_received(:request).with("#{api.base_path}/xxx/wallet/#{wallet_id}", logger: nil)
+        expect(client).to have_received(:request).with("#{api.base_path}/xxx/wallet/#{wallet_id}?", logger: nil)
       end
     end
   end

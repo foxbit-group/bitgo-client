@@ -74,8 +74,10 @@ module BitgoClient
       client.request("#{base_path}/#{coin_code}/wallet/#{wallet_id}/transfer?#{query_string}", logger: logger)
     end
 
-    def wallet(wallet_id, coin_code: :tbtc, logger: nil)
-      client.request("#{base_path}/#{coin_code}/wallet/#{wallet_id}", logger: logger)
+    def wallet(wallet_id, coin_code: :tbtc, logger: nil, all_tokens: nil)
+      query_string = build_query_string(allTokens: all_tokens)
+
+      client.request("#{base_path}/#{coin_code}/wallet/#{wallet_id}?#{query_string}", logger: logger)
     end
 
     private
