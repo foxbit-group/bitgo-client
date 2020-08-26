@@ -31,7 +31,6 @@ module BitgoClient
       body = payload.to_json if payload
 
       log logger, "Request url: #{url}, method: #{method}, body:"
-      log logger, payload
 
       options = {
         method: method,
