@@ -27,8 +27,8 @@ module BitgoClient
 
     def create_address(wallet_id, coin_code: :tbtc, logger: nil, proxy: nil)
       client.request(
-        "#{base_path}/#{coin_code}/wallet/#{wallet_id}/address", 
-        method: :post, 
+        "#{base_path}/#{coin_code}/wallet/#{wallet_id}/address",
+        method: :post,
         logger: logger,
         proxy: proxy,
       )
@@ -36,7 +36,7 @@ module BitgoClient
 
     def address(wallet_id, address, coin_code: :tbtc, logger: nil, proxy: nil)
       client.request(
-        "#{base_path}/#{coin_code}/wallet/#{wallet_id}/address/#{address}", 
+        "#{base_path}/#{coin_code}/wallet/#{wallet_id}/address/#{address}",
         logger: logger,
         proxy: proxy,
       )
@@ -44,16 +44,16 @@ module BitgoClient
 
     def fee(coin_code: :tbtc, logger: nil, proxy: nil)
       client.request(
-        "#{base_path}/#{coin_code}/tx/fee", 
-        logger: logger, 
+        "#{base_path}/#{coin_code}/tx/fee",
+        logger: logger,
         proxy: proxy,
       )
     end
 
     def get_transfer(wallet_id, transfer_id, coin_code: :tbtc, logger: nil, proxy: nil)
       client.request(
-        "#{base_path}/#{coin_code}/wallet/#{wallet_id}/transfer/#{transfer_id}", 
-        logger: logger, 
+        "#{base_path}/#{coin_code}/wallet/#{wallet_id}/transfer/#{transfer_id}",
+        logger: logger,
         proxy: proxy,
       )
     end
@@ -66,7 +66,7 @@ module BitgoClient
       )
 
       client.request(
-        "#{base_path}/#{coin_code}/wallet/#{wallet_id}/tx?#{query_string}", 
+        "#{base_path}/#{coin_code}/wallet/#{wallet_id}/tx?#{query_string}",
         logger: logger,
         proxy: proxy,
       )
@@ -74,8 +74,8 @@ module BitgoClient
 
     def transaction(wallet_id, transaction_id, coin_code: :tbtc, logger: nil, proxy: nil)
       client.request(
-        "#{base_path}/#{coin_code}/wallet/#{wallet_id}/tx/#{transaction_id}", 
-        logger: logger, 
+        "#{base_path}/#{coin_code}/wallet/#{wallet_id}/tx/#{transaction_id}",
+        logger: logger,
         proxy: proxy,
       )
     end
@@ -88,8 +88,8 @@ module BitgoClient
       )
 
       client.request(
-        "#{base_path}/#{coin_code}/wallet/#{wallet_id}/transfer?#{query_string}", 
-        logger: logger, 
+        "#{base_path}/#{coin_code}/wallet/#{wallet_id}/transfer?#{query_string}",
+        logger: logger,
         proxy: proxy,
       )
     end
@@ -98,8 +98,8 @@ module BitgoClient
       query_string = build_query_string(allTokens: all_tokens)
 
       client.request(
-        "#{base_path}/#{coin_code}/wallet/#{wallet_id}?#{query_string}", 
-        logger: logger, 
+        "#{base_path}/#{coin_code}/wallet/#{wallet_id}?#{query_string}",
+        logger: logger,
         proxy: proxy,
       )
     end
