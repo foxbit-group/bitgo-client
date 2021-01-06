@@ -6,7 +6,6 @@ RSpec.describe BitgoClient::Client do
   subject(:client) { described_class.new(WebmockHelper::TOKEN) }
 
   let(:base_path) { WebmockHelper::BASE_PATH }
-
   let(:headers) do
     {
       "Authorization" => "Bearer #{WebmockHelper::TOKEN}",

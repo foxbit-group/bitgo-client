@@ -27,22 +27,25 @@ module BitgoClient
       @access_token = access_token
     end
 
-    def request(url, payload = nil, method: :get, logger: nil)
+    def request(url, payload = nil, method: :get, logger: nil, proxy: nil)
       body = payload.to_json if payload
 
       log logger, "Request url: #{url}, method: #{method}, body:"
-      log logger, payload
 
-      request = Typhoeus::Request.new(
-        url,
+      options = {
         method: method,
         headers: {
           "Authorization" => "Bearer #{access_token}",
           "Content-Type"  => "application/json"
         },
         body: body
-      )
+      }
 
+      unless String(proxy).empty?
+        options[:proxy] = proxy
+      end
+
+      request = Typhoeus::Request.new(url, options)
       request.run
 
       response = request.response
