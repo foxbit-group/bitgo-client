@@ -236,4 +236,15 @@ RSpec.describe BitgoClient::V2 do
       end
     end
   end
+
+  describe "#lightning_invoice" do
+    let(:payload) { { key: :value } }
+
+    it "calls with expected params" do
+      api.lightning_invoice(wallet_id, payload)
+
+      expect(client).to have_received(:request)
+        .with("#{api.base_path}/wallet/#{wallet_id}/lightning/invoice", payload, method: :post, logger: nil)
+    end
+  end
 end
