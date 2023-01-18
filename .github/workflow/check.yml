@@ -1,0 +1,45 @@
+name: Tests
+
+on: [push]
+
+jobs:
+  security_check:
+    runs-on: [self-hosted, stage]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Salus Scan
+        run: docker run --rm -t -v $(pwd):/home/repo coinbase/salus:latest
+
+  tests:
+    runs-on: [self-hosted, stage]
+    container:
+      image: ruby:2.6.6
+      env:
+        BUNDLE_JOBS: 3
+        BUNDLE_RETRY: 3
+        BUNDLE_PATH: vendor/bundle
+        RAILS_ENV: test
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Which bundler?
+        run: |
+          bundle -v
+
+      - name: Cache
+        id: restore-cache
+        uses: actions/cache@v3
+        with:
+          path: vendor/bundle
+          key: rails-demo-bundle-v2-${{ hashFiles('Gemfile.lock') }}
+
+      - name: Bundle Install
+        run: |
+          bundle check || bundle install
+
+      - name: Rubocop
+        run: bundle exec rubocop --require rubocop-rspec
+
+      - name: Run rspec
+        run: |
+          bundle exec rspec spec
