@@ -79,12 +79,12 @@ module BitgoClient
 
       client.request("#{base_path}/#{coin_code}/wallet/#{wallet_id}?#{query_string}", logger: logger)
     end
-    
+
     def lightning_invoice(wallet_id, payload, logger: nil)
       client.request(
-        "#{base_path}/wallet/#{wallet_id}/lightning/invoice", 
+        "#{base_path}/wallet/#{wallet_id}/lightning/invoice",
         payload,
-        method: :post, 
+        method: :post,
         logger: logger
       )
     end
