@@ -247,4 +247,22 @@ RSpec.describe BitgoClient::V2 do
         .with("#{api.base_path}/wallet/#{wallet_id}/lightning/invoice", payload, method: :post, logger: nil)
     end
   end
+
+  describe "#balance" do
+    context "with default coin_code" do
+      it "calls client request with the correct path" do
+        api.balance
+
+        expect(client).to have_received(:request).with("#{api.base_path}/wallet/balances?coin=tbtc", logger: nil)
+      end
+    end
+
+    context "with specific coin_code" do
+      it "calls client request with the correct path" do
+        api.balance(coin_code: :xxx)
+
+        expect(client).to have_received(:request).with("#{api.base_path}/wallet/balances?coin=xxx", logger: nil)
+      end
+    end
+  end
 end
