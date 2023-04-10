@@ -7,7 +7,7 @@ module BitgoClient
     ENV_PROD  = "prod"
     ENV_TEST  = "test"
     PATH_PROD = "https://www.bitgo.com/api/v2"
-    PATH_TEST = "https://test.bitgo.com/api/v2"
+    PATH_TEST = "https://app.bitgo-test.com/api/v2"
 
     attr_reader :access_token, :env, :express_path
 
