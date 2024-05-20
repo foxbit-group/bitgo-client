@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
 
   spec.summary     = "BitGo's API Client."
   spec.description = "A Ruby client to BitGo's API and Express API."
-  spec.homepage    = "https://github.com/modiax/bitgo-client"
+  spec.homepage    = "https://github.com/foxbit-group/bitgo-client"
   spec.license     = "MIT"
 
   spec.files         = Dir["lib/**/*"]
