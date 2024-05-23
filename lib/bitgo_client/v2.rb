@@ -33,8 +33,10 @@ module BitgoClient
       client.request("#{base_path}/#{coin_code}/wallet/#{wallet_id}/address/#{address}", logger: logger)
     end
 
-    def fee(coin_code: :tbtc, logger: nil)
-      client.request("#{base_path}/#{coin_code}/tx/fee", logger: logger)
+    def fee(coin_code: :tbtc, logger: nil, tx: nil)
+      query_string = build_query_string(tx: tx)
+
+      client.request("#{base_path}/#{coin_code}/tx/fee?#{query_string}", logger: logger)
     end
 
     def get_transfer(wallet_id, transfer_id, coin_code: :tbtc, logger: nil)

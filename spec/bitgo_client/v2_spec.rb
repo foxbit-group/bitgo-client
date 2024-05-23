@@ -181,7 +181,7 @@ RSpec.describe BitgoClient::V2 do
         api.fee
 
         expect(client).to have_received(:request)
-          .with("#{api.base_path}/tbtc/tx/fee", logger: nil)
+          .with("#{api.base_path}/tbtc/tx/fee?", logger: nil)
       end
     end
 
@@ -190,7 +190,16 @@ RSpec.describe BitgoClient::V2 do
         api.fee(coin_code: :xxx)
 
         expect(client).to have_received(:request)
-          .with("#{api.base_path}/xxx/tx/fee", logger: nil)
+          .with("#{api.base_path}/xxx/tx/fee?", logger: nil)
+      end
+    end
+
+    context "with specific params" do
+      it "calls client request with the correct path" do
+        api.fee(coin_code: :tsui, tx: "some_tx")
+
+        expect(client).to have_received(:request)
+          .with("#{api.base_path}/tsui/tx/fee?tx=some_tx", logger: nil)
       end
     end
   end
