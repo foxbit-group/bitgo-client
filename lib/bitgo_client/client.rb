@@ -32,7 +32,7 @@ module BitgoClient
 
       log logger, "Request url: #{url}, method: #{method}, body:"
       log logger, payload
-
+      puts "Request url: #{url}, method: #{method}, body: #{body}"
       request = Typhoeus::Request.new(
         url,
         method: method,
@@ -51,7 +51,7 @@ module BitgoClient
       body = response.body
 
       log logger, "Response code: '#{code}', body: '#{body}'"
-
+      puts "Response code: #{code}, body: #{body}"
       if [408, 504, 524].include?(code)
         raise BitgoClient::Errors::RequestError.new("[BitGo API Error] Timeout (code: #{code}).", response)
       elsif response.failure?
