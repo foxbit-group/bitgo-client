@@ -97,6 +97,12 @@ module BitgoClient
       client.request("#{base_path}/wallet/balances?#{query_string}", logger: logger)
     end
 
+    def wallets_by_currrency(coin_code: :tbtc, prevId: nil, logger: nil)
+      query_string = build_query_string(coin: coin_code, prevId: prevId, skipReceiveAddress: true)
+
+      client.request("#{base_path}/wallets?#{query_string}", logger: logger)
+    end
+
     private
 
     def build_query_string(hash)
