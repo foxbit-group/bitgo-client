@@ -22,6 +22,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Install Bundler 2.2.33
+        run: |
+          gem install bundler -v 2.2.33
+
       - name: Which bundler?
         run: |
           bundle -v
