@@ -76,6 +76,7 @@ module BitgoClient
       end
 
       tag = "#{self.class}/request"
+      puts 'Chegou aqui'
 
       if logger.respond_to?(:tagged)
         logger.tagged(tag) { logger.info(message) }
