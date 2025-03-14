@@ -68,6 +68,7 @@ module BitgoClient
     private
 
     def log(logger, message)
+      puts 'Chegou aqui'
       return if logger.nil?
 
       if message.is_a?(Hash)
@@ -76,7 +77,6 @@ module BitgoClient
       end
 
       tag = "#{self.class}/request"
-      puts 'Chegou aqui'
 
       if logger.respond_to?(:tagged)
         logger.tagged(tag) { logger.info(message) }
