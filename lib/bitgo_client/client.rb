@@ -78,9 +78,9 @@ module BitgoClient
       tag = "#{self.class}/request"
 
       if logger.respond_to?(:tagged)
-        logger.tagged(tag) { logger.debug(message) }
+        logger.tagged(tag) { logger.info(message) }
       else
-        logger.debug(tag) { message }
+        logger.info(tag) { message }
       end
     end
 
