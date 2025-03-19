@@ -103,6 +103,10 @@ module BitgoClient
       client.request("#{base_path}/wallets?#{query_string}", logger: logger)
     end
 
+    def get_pending_approvals(approvalId, logger: nil)
+      client.request("#{base_path}/pendingapprovals/#{approvalId}", logger: logger)
+    end
+
     private
 
     def build_query_string(hash)
