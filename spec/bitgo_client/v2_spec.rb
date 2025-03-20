@@ -274,4 +274,15 @@ RSpec.describe BitgoClient::V2 do
       end
     end
   end
+
+  describe "#get_pending_approvals" do
+    let(:pending_approval_id) { "0x888" }
+
+    it "calls with expected params" do
+      api.get_pending_approvals(pending_approval_id)
+
+      expect(client).to have_received(:request)
+        .with("#{api.base_path}/pendingapprovals/#{pending_approval_id}", logger: nil)
+    end
+  end
 end
