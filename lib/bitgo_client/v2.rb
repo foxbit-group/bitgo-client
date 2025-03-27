@@ -43,6 +43,15 @@ module BitgoClient
       client.request("#{base_path}/#{coin_code}/wallet/#{wallet_id}/transfer/#{transfer_id}", logger: logger)
     end
 
+    def send_many(wallet_id, payload, coin_code: :tbtc, logger: nil)
+      client.request(
+        "#{express_path}/api/v2/#{coin_code}/wallet/#{wallet_id}/sendmany",
+        payload,
+        method: :post,
+        logger: logger
+      )
+    end
+
     def send_transaction(wallet_id, payload, coin_code: :tbtc, logger: nil)
       client.request(
         "#{express_path}/api/v2/#{coin_code}/wallet/#{wallet_id}/sendcoins",

@@ -133,6 +133,28 @@ RSpec.describe BitgoClient::V2 do
     end
   end
 
+  describe "#send_many" do
+    let(:payload) { { key: :value } }
+
+    context "with default coin_code" do
+      it "calls client request with the correct path" do
+        api.send_transaction(wallet_id, payload)
+
+        expect(client).to have_received(:request)
+          .with("#{api.express_path}/api/v2/tbtc/wallet/#{wallet_id}/sendmany", payload, method: :post, logger: nil)
+      end
+    end
+
+    context "with specific coin_code" do
+      it "calls client request with the correct path" do
+        api.send_transaction(wallet_id, payload, coin_code: :xxx)
+
+        expect(client).to have_received(:request)
+          .with("#{api.express_path}/api/v2/xxx/wallet/#{wallet_id}/sendmany", payload, method: :post, logger: nil)
+      end
+    end
+  end
+
   describe "#transactions" do
     context "with default params" do
       it "calls client request with the correct path" do
