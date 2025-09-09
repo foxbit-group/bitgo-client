@@ -33,6 +33,8 @@ module BitgoClient
       log logger, "Request url: #{url}, method: #{method}, body:"
       log logger, payload
 
+      Typhoeus::Config.memoize = false
+
       request = Typhoeus::Request.new(
         url,
         method: method,
