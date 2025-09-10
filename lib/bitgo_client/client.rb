@@ -28,12 +28,13 @@ module BitgoClient
     end
 
     def request(url, payload = nil, method: :get, logger: nil)
+      Typhoeus::Config.memoize = false
+      Typhoeus::Config.cache   = nil
+
       body = payload.to_json if payload
 
       log logger, "Request url: #{url}, method: #{method}, body:"
       log logger, payload
-
-      Typhoeus::Config.memoize = false
 
       request = Typhoeus::Request.new(
         url,
