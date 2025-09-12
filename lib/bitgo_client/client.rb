@@ -36,13 +36,18 @@ module BitgoClient
       log logger, "Request url: #{url}, method: #{method}, body:"
       log logger, payload
 
+      headers = {
+        "Authorization" => "Bearer #{access_token}",
+        "Content-Type"  => "application/json",
+        "Connection" => "close"
+      }
+
       request = Typhoeus::Request.new(
         url,
         method: method,
-        headers: {
-          "Authorization" => "Bearer #{access_token}",
-          "Content-Type"  => "application/json"
-        },
+        headers: headers,
+        dns_cache_timeout: 0,
+        ssl_sessionid_cache: false,
         body: body
       )
 
