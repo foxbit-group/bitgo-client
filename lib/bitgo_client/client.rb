@@ -39,6 +39,7 @@ module BitgoClient
       headers = {
         "Authorization" => "Bearer #{access_token}",
         "Content-Type"  => "application/json",
+        "Connection" => "close"
       }
 
       request = Typhoeus::Request.new(
