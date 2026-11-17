@@ -6,7 +6,7 @@ jobs:
   security_check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Salus Scan
         run: docker run --rm -t -v $(pwd):/home/repo coinbase/salus:latest
 
@@ -20,7 +20,7 @@ jobs:
         BUNDLE_PATH: vendor/bundle
         RAILS_ENV: test
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Install Bundler 2.2.33
         run: |
@@ -32,7 +32,7 @@ jobs:
 
       - name: Cache
         id: restore-cache
-        uses: actions/cache@v3
+        uses: actions/cache@6f8efc29b200d32929f49075959781ed54ec270c # v3.5.0
         with:
           path: vendor/bundle
           key: rails-demo-bundle-v2-${{ hashFiles('Gemfile.lock') }}
